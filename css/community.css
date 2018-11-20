@@ -2,6 +2,13 @@
     margin: 0px;
     padding: 0px;
 }
+a {
+    text-decoration: none;
+    color: black;
+}
+a:hover {
+    color: rgb(189, 189, 189);
+}
 .nav {
     height: 58px;
     width: 100%;
@@ -98,5 +105,110 @@ a {
     background-color: rgb(78, 90, 99);
     z-index: -1;
 }
-
-
+#pre {
+    position: absolute;
+    height: 55px;
+    width: 45px;
+    top: 252px;
+    left: 563px;
+    background-color: rgb(131, 140, 146);
+    padding-top: 25px;
+    padding-left: 15px;
+    opacity: 0.8;
+    z-index: 100;
+}
+#next {
+    position: absolute;
+    height: 55px;
+    width: 35px;
+    top: 252px;
+    left: 1215px;
+    background-color: rgb(131, 140, 146);
+    padding-top: 25px;
+    padding-left: 25px;
+    opacity: 0.8;
+    z-index: 100;
+}
+.box1 {
+    position: absolute;
+    height: 410px;
+    width: 677px;
+    top: 104px;
+    left: 259px;
+    z-index: 8;
+    box-shadow:black 0px 0px 10px;
+}
+.box2 {
+    position: absolute;
+    height: 410px;
+    width: 677px;
+    top: 82px;
+    left: 581px;
+    z-index: 9;
+    box-shadow:black 0px 0px 10px;
+}
+.box3 {
+    position: absolute;
+    height: 410px;
+    width: 677px;
+    top: 104px;
+    left: 864px;
+    z-index: 7;
+    box-shadow:black 0px 0px 10px;
+}
+.page_1 {
+    position: absolute;
+    top: 530px;
+    width: 100%;
+    height: 472px;
+}
+.page_1 .coment_1 {
+    position: absolute;
+    top: 24px;
+    left: 70px;
+    height: 100px;
+    width: 840px;
+}
+.headImg_left {
+    display: block;
+    float: left;
+    height: 103px;
+    width: 103px;
+    background-image: url(../img/head.png);
+    background-repeat: no-repeat;
+    font-size: 22px;
+}
+.model_content_left {
+    position: absolute;
+    left: 100px;
+    width: 800px;
+    height: 50px;
+    padding-top: 20px;
+    padding-left: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.page_1 .coment_2 {
+    position: absolute;
+    top: 128px;
+    right: 15px;
+    height: 100px;
+    width: 840px;
+    background-color: blue;
+}
+.page_1 .coment_3 {
+    position: absolute;
+    top: 232px;
+    left: 70px;
+    height: 100px;
+    width: 840px;
+    background-color: blue;
+}
+.page_1 .coment_4 {
+    position: absolute;
+    top: 336px;
+    right: 15px;
+    height: 100px;
+    width: 840px;
+    background-color: blue;
+}

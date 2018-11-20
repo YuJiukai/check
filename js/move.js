@@ -1,58 +1,49 @@
-function getStyle(obj, name){
-    return obj.currentStyle?obj.currentStyle[name]:getComputedStyle(obj, false)[name];
-};
+function startMove(obj, json, fn) {
+	clearInterval(obj.iTimer);
+	var iCur = 0;
+	var iSpeed = 0;
+		
+	obj.iTimer = setInterval(function() {
+		
+		var iBtn = true;
+					
+		for ( var attr in json ) {
+							
+			var iTarget = json[attr];
+			
+			if (attr == 'opacity') {
+				iCur = Math.round(css( obj, 'opacity' ) * 100);
+			} else {
+				iCur = parseInt(css(obj, attr));
+			}
+			
+			iSpeed = ( iTarget - iCur ) / 8;
+			iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+			
+			if (iCur != iTarget) {
+				iBtn = false;
+				if (attr == 'opacity') {
+					obj.style.opacity = (iCur + iSpeed) / 100;
+					obj.style.filter = 'alpha(opacity='+ (iCur + iSpeed) +')';
+				} else {
+					obj.style[attr] = iCur + iSpeed + 'px';
+				}
+			}
+			
+		}
+		
+		if (iBtn) {
+			clearInterval(obj.iTimer);
+			fn && fn.call(obj);
+		}
+		
+	}, 30);
+}
 
-function move(obj, json, options){
-
-    options=options||{};
-    options.type=options.type||'buffer';
-    options.time=options.time||700;
-    
-    var count=parseInt(options.time/30);
-    var n=0;
-    
-    var start={};
-    var dis={};
-    
-    for(var name in json){
-        if(name=='opacity'){
-            start[name]=Math.round(parseFloat(getStyle(obj, name))*100);
-        }else{
-            start[name]=parseInt(getStyle(obj, name));
-        };
-        dis[name]=json[name]-start[name];
-    };
-    
-    clearInterval(obj.timer);
-    obj.timer=setInterval(function (){
-        n++;
-        
-        for(var name in json){
-            switch(options.type){
-                case 'linear':        //匀速
-                    var cur=start[name]+dis[name]*n/count;
-                    break;
-                case 'buffer':        //缓冲
-                    var a=1-n/count;
-                    var cur=start[name]+dis[name]*(1-a*a*a);
-                    break;
-                case 'ease-in':        //加速
-                    var a=n/count;
-                    var cur=start[name]+dis[name]*(a*a*a);
-                    break;
-            };
-            
-            if(name=='opacity'){
-                obj.style.filter='alpha(opacity:'+cur+')';
-                obj.style.opacity=cur/100;
-            }else{
-                obj.style[name]=cur+'px';
-            };
-        };
-        
-        if(n==count){
-            clearInterval(obj.timer);
-            options.end && options.end();
-        };
-    }, 30);
+function css(obj, attr) {
+	if (obj.currentStyle) {
+		return obj.currentStyle[attr];
+	} else {
+		return getComputedStyle(obj, false)[attr];
+	}
 }
